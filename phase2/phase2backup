@@ -1,0 +1,857 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+CREATE ROLE webuser1;
+ALTER ROLE webuser1 WITH SUPERUSER INHERIT NOCREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:3mvoAHSDKoiyC3ben8Tflg==$dcJWHbJz0L8Ywcpxb0P3rLvR6w9pOCACv0Y/qflPBGY=:kTvEtj+DZEAgrUAkDVaML8BuAccQQqwEWQ3OHmMuiOM=';
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "3010-proj-grp-10" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: 3010-proj-grp-10; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "3010-proj-grp-10" WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE "3010-proj-grp-10" OWNER TO postgres;
+
+\connect -reuse-previous=on "dbname='3010-proj-grp-10'"
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "csdashboard" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: csdashboard; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE csdashboard WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE csdashboard OWNER TO postgres;
+
+\connect csdashboard
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: committee_assignments; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.committee_assignments (
+    faculty_id integer,
+    committee_id integer,
+    start_date date,
+    end_date date,
+    remarks text
+);
+
+
+ALTER TABLE public.committee_assignments OWNER TO postgres;
+
+--
+-- Name: committee_names; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.committee_names (
+    id integer NOT NULL,
+    committee_name character varying(100) NOT NULL,
+    remarks text
+);
+
+
+ALTER TABLE public.committee_names OWNER TO postgres;
+
+--
+-- Name: committee_names_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.committee_names_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.committee_names_id_seq OWNER TO postgres;
+
+--
+-- Name: committee_names_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.committee_names_id_seq OWNED BY public.committee_names.id;
+
+
+--
+-- Name: course_directors; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.course_directors (
+    id integer NOT NULL,
+    prefix character varying(10) NOT NULL,
+    number integer NOT NULL,
+    course_director_id integer,
+    remarks text
+);
+
+
+ALTER TABLE public.course_directors OWNER TO postgres;
+
+--
+-- Name: course_directors_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.course_directors_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_directors_id_seq OWNER TO postgres;
+
+--
+-- Name: course_directors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.course_directors_id_seq OWNED BY public.course_directors.id;
+
+
+--
+-- Name: faculty; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.faculty (
+    id integer NOT NULL,
+    honorific character varying(10),
+    first_name character varying(50),
+    middle_initial character varying(1),
+    last_name character varying(50),
+    email character varying(100),
+    phone character varying(20),
+    office character varying(50),
+    research_interests text,
+    rank character varying(50),
+    remarks text,
+    currently_employed character varying(3)
+);
+
+
+ALTER TABLE public.faculty OWNER TO postgres;
+
+--
+-- Name: faculty_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.faculty_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.faculty_id_seq OWNER TO postgres;
+
+--
+-- Name: faculty_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.faculty_id_seq OWNED BY public.faculty.id;
+
+
+--
+-- Name: schedule_history; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.schedule_history (
+    year integer,
+    semester text,
+    prefix text,
+    number integer,
+    section integer,
+    crn integer,
+    enrollment integer,
+    instructor integer,
+    days text,
+    begintime integer,
+    endtime integer,
+    remarks text
+);
+
+
+ALTER TABLE public.schedule_history OWNER TO postgres;
+
+--
+-- Name: committee_names id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.committee_names ALTER COLUMN id SET DEFAULT nextval('public.committee_names_id_seq'::regclass);
+
+
+--
+-- Name: course_directors id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course_directors ALTER COLUMN id SET DEFAULT nextval('public.course_directors_id_seq'::regclass);
+
+
+--
+-- Name: faculty id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.faculty ALTER COLUMN id SET DEFAULT nextval('public.faculty_id_seq'::regclass);
+
+
+--
+-- Data for Name: committee_assignments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.committee_assignments (faculty_id, committee_id, start_date, end_date, remarks) FROM stdin;
+1	1	2018-08-01	2021-07-31	\N
+4	1	2018-08-01	2021-07-31	\N
+9	1	2019-08-01	2022-07-31	\N
+15	2	2018-08-01	2021-07-31	\N
+8	2	2019-08-01	2022-07-31	\N
+12	2	2018-08-01	2021-07-31	\N
+1	3	2020-08-01	2023-07-31	\N
+7	3	2018-08-01	2021-07-31	\N
+9	3	2008-08-01	2021-07-31	\N
+3	4	2021-01-01	2023-12-31	\N
+5	4	2021-01-01	2023-12-31	\N
+5	5	2021-01-01	2023-12-31	\N
+12	5	2021-01-01	2023-12-31	\N
+1	6	\N	\N	\N
+4	6	\N	\N	\N
+5	6	\N	\N	\N
+8	6	\N	\N	\N
+15	6	\N	\N	\N
+1	7	\N	\N	\N
+4	7	\N	\N	\N
+5	7	\N	\N	\N
+8	7	\N	\N	\N
+15	7	\N	\N	\N
+15	8	2021-01-01	2021-05-31	\N
+\.
+
+
+--
+-- Data for Name: committee_names; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.committee_names (id, committee_name, remarks) FROM stdin;
+1	Undergraduate Curriculum Committee	\N
+2	Graduate Curriculum Committee	\N
+3	Assessment Committee	\N
+4	Awards Committee	\N
+5	Scholarships Committee	\N
+6	Personnel Committee	\N
+7	Promotion and Tenure Committee	\N
+8	CET Budget Workgroup Committee	CET ad hoc committee to explore ways to meet projected budget cuts
+\.
+
+
+--
+-- Data for Name: course_directors; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.course_directors (id, prefix, number, course_director_id, remarks) FROM stdin;
+1	CSCI	1000	14	\N
+2	CSCI	1003	14	\N
+3	CSCI	1010	14	\N
+4	CSCI	1011	14	\N
+5	CSCI	2400	12	\N
+6	CSCI	2405	12	\N
+7	CSCI	2410	5	\N
+8	CSCI	2530	1	\N
+9	CSCI	2540	1	\N
+10	CSCI	3000	9	\N
+11	CSCI	3010	9	\N
+12	CSCI	3030	12	\N
+13	CSCI	3200	12	\N
+14	CSCI	3550	9	\N
+15	CSCI	3584	5	\N
+16	CSCI	3650	5	\N
+17	CSCI	3675	1	\N
+18	CSCI	3700	4	\N
+19	CSCI	3800	9	\N
+20	CSCI	4110	7	\N
+21	CSCI	4120	16	\N
+22	CSCI	4130	6	\N
+23	CSCI	4140	7	\N
+24	CSCI	4150	6	\N
+25	CSCI	4160	5	\N
+26	CSCI	4170	8	\N
+27	CSCI	4180	7	\N
+28	CSCI	4190	5	\N
+29	CSCI	4230	8	\N
+30	CSCI	4231	8	\N
+31	CSCI	4300	6	\N
+32	CSCI	4520	9	\N
+33	CSCI	4540	8	\N
+34	CSCI	4550	9	\N
+35	CSCI	4602	1	\N
+36	CSCI	4627	1	\N
+37	CSCI	4710	16	\N
+38	CSCI	4900	14	\N
+39	CSCI	4905	6	\N
+40	SENG	1000	15	\N
+41	SENG	1010	16	\N
+42	SENG	1020	16	\N
+43	SENG	1030	16	\N
+44	SENG	2000	11	\N
+45	SENG	2010	11	\N
+46	SENG	2020	8	\N
+47	SENG	3000	8	\N
+48	SENG	3010	3	\N
+49	SENG	3020	3	\N
+50	SENG	3700	6	\N
+51	SENG	4500	11	\N
+52	SENG	4510	11	\N
+53	CSCI	5002	5	\N
+54	CSCI	5220	1	\N
+55	CSCI	5501	6	\N
+56	CSCI	5502	6	\N
+57	CSCI	5503	6	\N
+58	CSCI	5800	7	\N
+59	CSCI	6010	7	\N
+60	CSCI	6020	16	\N
+61	CSCI	6030	6	\N
+62	CSCI	6040	7	\N
+63	CSCI	6045	15	\N
+64	CSCI	6050	6	\N
+65	CSCI	6100	5	\N
+66	CSCI	6120	15	\N
+67	CSCI	6130	15	\N
+68	CSCI	6140	15	\N
+69	CSCI	6150	5	\N
+70	CSCI	6220	1	\N
+71	CSCI	6230	8	\N
+72	CSCI	6300	5	\N
+73	CSCI	6410	5	\N
+74	CSCI	6420	1	\N
+75	CSCI	6510	5	\N
+76	CSCI	6600	4	\N
+77	CSCI	6710	16	\N
+78	CSCI	6810	7	\N
+79	CSCI	6820	6	\N
+80	CSCI	6840	4	\N
+81	CSCI	6905	6	\N
+82	CSCI	6995	1	\N
+83	CSCI	7000	8	\N
+84	CSCI	7001	8	\N
+85	SENG	5000	8	\N
+86	SENG	5005	5	\N
+87	SENG	6230	8	\N
+88	SENG	6235	15	\N
+89	SENG	6240	15	\N
+90	SENG	6245	8	\N
+91	SENG	6247	12	\N
+92	SENG	6250	8	\N
+93	SENG	6255	3	\N
+94	SENG	6260	3	\N
+95	SENG	6265	3	\N
+96	SENG	6270	3	\N
+97	SENG	6275	3	\N
+98	SENG	6280	8	\N
+99	SENG	6285	15	\N
+100	SENG	6290	15	\N
+101	SENG	7000	15	\N
+102	DASC	6000	6	\N
+103	DASC	6005	6	\N
+104	DASC	6010	7	\N
+105	DASC	6020	16	\N
+106	DASC	6030	6	\N
+107	DASC	6040	7	\N
+108	DASC	6050	6	\N
+109	DASC	6060	6	\N
+110	DASC	6090	6	\N
+\.
+
+
+--
+-- Data for Name: faculty; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.faculty (id, honorific, first_name, middle_initial, last_name, email, phone, office, research_interests, rank, remarks, currently_employed) FROM stdin;
+1	Dr.	Karl		Abrahamson	abrahamsonk@ecu.edu	252-328-9689	Sci-Tech C113	Programming Languages	Associate Professor	Undergraduate Program Director	Yes
+2	Ms.	Sheaneatha	D	Applewhite-Hopkins	applewhitehopkins16@ecu.edu	252-328-9680	Sci-Tech C107	\N	Administrative Assistant	\N	Yes
+3	Dr.	Maral		Azizi	azizim19@ecu.edu	252-328-9680	Sci-Tech C108	Software Engineering, Information Retrieval, Database Design, Machine Learning	Assistant Professor	\N	Yes
+4	Dr.	Qin		Ding	dingq@ecu.edu	252-328-9686	Sci-Tech C118	Databases, Data mining, Bioinformatics	Associate Professor	\N	Yes
+5	Dr.	Krishnan		Gopal	gopal@ecu.edu	252-328-9688	Sci-Tech C118	Combinatorics, Cryptography and Information Security, Distributed Computing, Algorithms and Theoretical Computer Science	Associate Professor	\N	Yes
+6	Dr.	Venkat	N	Gudivada	gudivadav15@ecu.edu	252-328-9680	Sci-Tech C-107	Data Management/Analytics, Information Retrieval/Systems, Natural Language Processing, Computer Vision, Personalized Learning	Professor	Department Chair	Yes
+7	Dr.	Nick		Herndon	herndonn19@ecu.edu	252-328-9696	Sci-Tech C108	Artificial Intelligence, Machine Learning, Data Science, Big Data Analytics, and Computational Biology	Assistant Professor	\N	Yes
+8	Dr.	Mark		Hills	hillsma@ecu.edu	252-328-9692	Sci-Tech C110	Program Analysis, Programming Language Implementation, Domain-Specific Languages, Software Modeling and Verification, Software Analytics, Formal Semantics of Programming Languages	Associate Professor	Graduate Program Director	Yes
+9	Mr.	Bobby		Hoggard	hoggardr@ecu.edu	252-328-9695	Sci-Tech C105	Cloud Computing, Computer Architecture, Web Applications, Computer Science Education	Instructor	\N	Yes
+10	Mr.	John		Jones	jonesjo@ecu.edu	252-328-9606	Sci-Tech 109	Data Structures and Algorithms, Digital Electronics, Software Construction, Networking, Data Center Virtualization, Distributed Computing, Storage Management, Operating Systems	Adjunct Instructor	\N	Yes
+11	Dr.	Jonathan	A	Saddler	saddlerj20@ecu.edu	252-328-9687	Sci-Tech C117	Software Engineering	Teaching Assistant Professor	\N	Yes
+12	Dr.	Kamran		Sartipi	sartipik16@ecu.edu	252-328-9694	Sci-Tech C122	Software Engineering, Knowledge Engineering and Data Mining, Cyber Security and Data Privacy, User-Behavior based Access Control, Medical & Health Systems Integration and Informatics, Service Intelligence for Cloud, Decision Support Systems	Assistant Professor	\N	Yes
+13	Dr.	Ronnie		Smith	smithron@cs.ecu.edu	252-328-9687	Sci-Tech C117	Artificial Intelligence, Spoken Natural Languages	Research Associate Professor	\N	No
+14	Mr.	Joel		Sweatte	sweattej@ecu.edu	252-328-9439	Sci-Tech C112	Data Center Virtualization, Cloud Computing, Mainframe Platform Computing, Storage Management	Instructor	\N	Yes
+15	Dr.	Nasseh		Tabrizi	tabrizim@ecu.edu	252-328-9691	Sci-Tech C112	Big Data Analytics, Cloud Computing, Computer Vision, Software Requirement Engineering, Information Retrieval, Virtual Reality, Machine Learning, Computer Science and Software Engineering Education	Professor	\N	Yes
+16	Dr.	Rui		Wu	wur18@ecu.edu	252-328-9682	Sci-Tech C107	Data Processing and Visualization, Interdisciplinary Research	Assistant Professor	\N	Yes
+17	Dr.	Patyi		Imre	patyii@ecu.edu	252-328-6461	\N	\N	Associate Professor	\N	No
+18	Ms.	Sumati	R	Kulkarni	\N	\N	\N	\N	Teaching Assistant	\N	No
+19	Ms.	Logan	G	Childers	\N	\N	\N	\N	Teaching Assistant	\N	No
+20	Mr.	Gregory		Knight	\N	\N	\N	\N	Adjunct Instructor	\N	No
+21	Dr.	Sergiy		Vilkomir	\N	\N	\N	\N	Associate Professor	Software Testing	No
+22	Dr.	Ding		Junhua	\N	\N	\N	\N	Associate Professor	Software Testing, Machine Learning	No
+23	Mr.	David	M	Anderson	\N	\N	\N	\N	Teaching Assistant	\N	No
+24	Mr.	Aryan	A	Azimzadeh	\N	\N	\N	\N	Teaching Assistant	\N	No
+25	Mr.	Shawn	K	Braddy	\N	\N	\N	\N	Teaching Assistant	\N	No
+26	Dr.	Masao		Kishore	\N	\N	\N	\N	Associate Professor	\N	No
+27	Mr.	David	R	Hoffman	\N	\N	\N	\N	Teaching Assistant	\N	No
+28	Dr.	Karl		Abrahamson	abrahamsonk@ecu.edu	252-328-9689	Sci-Tech C113	Programming Languages	Associate Professor	Undergraduate Program Director	Yes
+29	Ms.	Sheaneatha	D	Applewhite-Hopkins	applewhitehopkins16@ecu.edu	252-328-9680	Sci-Tech C107	\N	Administrative Assistant	\N	Yes
+30	Dr.	Maral		Azizi	azizim19@ecu.edu	252-328-9680	Sci-Tech C108	Software Engineering, Information Retrieval, Database Design, Machine Learning	Assistant Professor	\N	Yes
+31	Dr.	Qin		Ding	dingq@ecu.edu	252-328-9686	Sci-Tech C118	Databases, Data mining, Bioinformatics	Associate Professor	\N	Yes
+32	Dr.	Krishnan		Gopal	gopal@ecu.edu	252-328-9688	Sci-Tech C118	Combinatorics, Cryptography and Information Security, Distributed Computing, Algorithms and Theoretical Computer Science	Associate Professor	\N	Yes
+33	Dr.	Venkat	N	Gudivada	gudivadav15@ecu.edu	252-328-9680	Sci-Tech C-107	Data Management/Analytics, Information Retrieval/Systems, Natural Language Processing, Computer Vision, Personalized Learning	Professor	Department Chair	Yes
+34	Dr.	Nick		Herndon	herndonn19@ecu.edu	252-328-9696	Sci-Tech C108	Artificial Intelligence, Machine Learning, Data Science, Big Data Analytics, and Computational Biology	Assistant Professor	\N	Yes
+35	Dr.	Mark		Hills	hillsma@ecu.edu	252-328-9692	Sci-Tech C110	Program Analysis, Programming Language Implementation, Domain-Specific Languages, Software Modeling and Verification, Software Analytics, Formal Semantics of Programming Languages	Associate Professor	Graduate Program Director	Yes
+36	Mr.	Bobby		Hoggard	hoggardr@ecu.edu	252-328-9695	Sci-Tech C105	Cloud Computing, Computer Architecture, Web Applications, Computer Science Education	Instructor	\N	Yes
+37	Mr.	John		Jones	jonesjo@ecu.edu	252-328-9606	Sci-Tech 109	Data Structures and Algorithms, Digital Electronics, Software Construction, Networking, Data Center Virtualization, Distributed Computing, Storage Management, Operating Systems	Adjunct Instructor	\N	Yes
+38	Dr.	Jonathan	A	Saddler	saddlerj20@ecu.edu	252-328-9687	Sci-Tech C117	Software Engineering	Teaching Assistant Professor	\N	Yes
+39	Dr.	Kamran		Sartipi	sartipik16@ecu.edu	252-328-9694	Sci-Tech C122	Software Engineering, Knowledge Engineering and Data Mining, Cyber Security and Data Privacy, User-Behavior based Access Control, Medical & Health Systems Integration and Informatics, Service Intelligence for Cloud, Decision Support Systems	Assistant Professor	\N	Yes
+40	Dr.	Ronnie		Smith	smithron@cs.ecu.edu	252-328-9687	Sci-Tech C117	Artificial Intelligence, Spoken Natural Languages	Research Associate Professor	\N	No
+41	Mr.	Joel		Sweatte	sweattej@ecu.edu	252-328-9439	Sci-Tech C112	Data Center Virtualization, Cloud Computing, Mainframe Platform Computing, Storage Management	Instructor	\N	Yes
+42	Dr.	Nasseh		Tabrizi	tabrizim@ecu.edu	252-328-9691	Sci-Tech C112	Big Data Analytics, Cloud Computing, Computer Vision, Software Requirement Engineering, Information Retrieval, Virtual Reality, Machine Learning, Computer Science and Software Engineering Education	Professor	\N	Yes
+43	Dr.	Rui		Wu	wur18@ecu.edu	252-328-9682	Sci-Tech C107	Data Processing and Visualization, Interdisciplinary Research	Assistant Professor	\N	Yes
+44	Dr.	Patyi		Imre	patyii@ecu.edu	252-328-6461	\N	\N	Associate Professor	\N	No
+45	Ms.	Sumati	R	Kulkarni	\N	\N	\N	\N	Teaching Assistant	\N	No
+46	Ms.	Logan	G	Childers	\N	\N	\N	\N	Teaching Assistant	\N	No
+47	Mr.	Gregory		Knight	\N	\N	\N	\N	Adjunct Instructor	\N	No
+48	Dr.	Sergiy		Vilkomir	\N	\N	\N	\N	Associate Professor	Software Testing	No
+49	Dr.	Ding		Junhua	\N	\N	\N	\N	Associate Professor	Software Testing, Machine Learning	No
+50	Mr.	David	M	Anderson	\N	\N	\N	\N	Teaching Assistant	\N	No
+51	Mr.	Aryan	A	Azimzadeh	\N	\N	\N	\N	Teaching Assistant	\N	No
+52	Mr.	Shawn	K	Braddy	\N	\N	\N	\N	Teaching Assistant	\N	No
+53	Dr.	Masao		Kishore	\N	\N	\N	\N	Associate Professor	\N	No
+54	Mr.	David	R	Hoffman	\N	\N	\N	\N	Teaching Assistant	\N	No
+\.
+
+
+--
+-- Data for Name: schedule_history; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.schedule_history (year, semester, prefix, number, section, crn, enrollment, instructor, days, begintime, endtime, remarks) FROM stdin;
+\.
+
+
+--
+-- Name: committee_names_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.committee_names_id_seq', 8, true);
+
+
+--
+-- Name: course_directors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.course_directors_id_seq', 110, true);
+
+
+--
+-- Name: faculty_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.faculty_id_seq', 54, true);
+
+
+--
+-- Name: committee_names committee_names_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.committee_names
+    ADD CONSTRAINT committee_names_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: course_directors course_directors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course_directors
+    ADD CONSTRAINT course_directors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: faculty faculty_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.faculty
+    ADD CONSTRAINT faculty_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: course_directors; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.course_directors (
+    id integer NOT NULL,
+    prefix character varying(10) NOT NULL,
+    number integer NOT NULL,
+    course_director_id integer,
+    remarks text
+);
+
+
+ALTER TABLE public.course_directors OWNER TO postgres;
+
+--
+-- Name: course_directors_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.course_directors_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.course_directors_id_seq OWNER TO postgres;
+
+--
+-- Name: course_directors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.course_directors_id_seq OWNED BY public.course_directors.id;
+
+
+--
+-- Name: course_directors id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course_directors ALTER COLUMN id SET DEFAULT nextval('public.course_directors_id_seq'::regclass);
+
+
+--
+-- Data for Name: course_directors; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.course_directors (id, prefix, number, course_director_id, remarks) FROM stdin;
+\.
+
+
+--
+-- Name: course_directors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.course_directors_id_seq', 1, false);
+
+
+--
+-- Name: course_directors course_directors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course_directors
+    ADD CONSTRAINT course_directors_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "test1" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: test1; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE test1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE test1 OWNER TO postgres;
+
+\connect test1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "testdb" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: testdb; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE testdb WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE testdb OWNER TO postgres;
+
+\connect testdb
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "thirtytenprojgrpten" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: thirtytenprojgrpten; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE thirtytenprojgrpten WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE thirtytenprojgrpten OWNER TO postgres;
+
+\connect thirtytenprojgrpten
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
+--
+
